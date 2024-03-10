@@ -86,6 +86,19 @@
         default: null,
       },
     },
+    // created() {
+    //   console.log("CoachClassListPage");
+    //   console.log(this);
+    //   const initClassInfoPromise = this.$store.dispatch(
+    //     'initClassInfo',
+    //     this.classId
+    //     );
+    //   const getFacilitiesPromise =
+    //     this.$store.getters.isSuperuser && this.$store.state.core.facilities.length === 0
+    //       ? this.$store.dispatch('getFacilities').catch(() => {})
+    //       : Promise.resolve();
+    //   Promise.all([initClassInfoPromise, getFacilitiesPromise])
+    // },
     computed: {
       ...mapGetters(['isAdmin', 'isClassCoach', 'isFacilityCoach', 'userIsMultiFacilityAdmin']),
       ...mapState(['classList', 'dataLoading']),

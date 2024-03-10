@@ -26,11 +26,20 @@ export default [
     },
   },
   {
+    name: 'CoachClassListPage',
     path: '/:facility_id?/classes/:subtopicName?',
     component: CoachClassListPage,
     props: true,
-    handler(toRoute) {
+    async handler(toRoute) {
       // loading state is handled locally
+      console.log(this);
+      const initClassInfoPromise = store.dispatch('initClassInfo', toRoute.params.classId);
+  const getFacilitiesPromise =
+    store.getters.isSuperuser && store.state.core.facilities.length === 0
+      ? store.dispatch('getFacilities').catch(() => {})
+      : Promise.resolve();
+
+  await Promise.all([initClassInfoPromise, getFacilitiesPromise]);
       store.dispatch('notLoading');
       // if user only has access to one facility, facility_id will not be accessible from URL,
       // but always defaulting to userFacilityId would cause problems for multi-facility admins
@@ -69,6 +78,7 @@ export default [
     },
   },
   {
+    name: 'HomeActivityPage',
     path: '/:classId/home/activity',
     component: HomeActivityPage,
     handler() {
@@ -87,6 +97,7 @@ export default [
     },
   },
   {
+    name: 'StatusTestPage',
     path: '/about/statuses',
     component: StatusTestPage,
     handler() {
@@ -94,6 +105,7 @@ export default [
     },
   },
   {
+    name: 'CoachPrompts',
     path: '/coach-prompts',
     component: CoachPrompts,
     handler() {

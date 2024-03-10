@@ -60,6 +60,15 @@
         default: null,
       },
     },
+    created() {
+      console.log("AllFacilitiesPage");
+      const initClassInfoPromise = this.$store.dispatch('initClassInfo', this.$route.params.classId);
+      const getFacilitiesPromise =
+        this.$store.getters.isSuperuser && this.$store.state.core.facilities.length === 0
+          ? this.$store.dispatch('getFacilities').catch(() => {})
+          : Promise.resolve();
+      Promise.all([initClassInfoPromise, getFacilitiesPromise]);
+    },
     computed: {
       facilities() {
         return this.$store.state.core.facilities;

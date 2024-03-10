@@ -13,6 +13,8 @@ import LessonEditDetailsPage from './views/plan/LessonEditDetailsPage';
 import GroupsPage from './views/plan/GroupsPage';
 import GroupMembersPage from './views/plan/GroupMembersPage';
 import GroupEnrollPage from './views/plan/GroupEnrollPage';
+import AllFacilitiesPage from './views/AllFacilitiesPage';
+import CoachClassListPage from './views/CoachClassListPage';
 
 class CoachToolsModule extends KolibriApp {
   get stateSetters() {
@@ -80,6 +82,8 @@ class CoachToolsModule extends KolibriApp {
           GroupsPage.name,
           GroupMembersPage.name,
           GroupEnrollPage.name,
+          AllFacilitiesPage,
+          CoachClassListPage,
         ].includes(to.name)
       ) {
         next();
